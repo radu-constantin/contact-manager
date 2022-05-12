@@ -17,6 +17,7 @@ header {
 }
 
 body {
+    width: 100%;
     display: flex;
     flex-direction: column;
     background-color: #eaeaea;
@@ -46,11 +47,11 @@ input, button {
 
 .mid-section {
     width: 100%;
-    margin: 0;
+    /* margin: 0; */
 }
 
 .top-section button, .top-section input {
-    padding: 15px;
+    padding: 2%;
     border: 1px solid grey;
     font-size: 1.4em;
     display: inline-block;
@@ -72,7 +73,7 @@ input, button {
     padding: 15px;
     border: 1px solid grey;
     font-size: 1.4em;
-    width: 40%;k
+    width: 40%;
 }
 
 .lower-section p {
@@ -88,9 +89,28 @@ footer {
     background: linear-gradient(90deg, rgba(43,35,170,1) 0%, rgba(79,94,209,1) 14%, rgba(255,0,224,1) 86%);
 }
 
-@media screen and (min-width: 481px) {
+@media screen and (min-width: 600px) {
+    body {
+        background-color: white;
+    }
+
     .container {
         width: 80%;
+        border: 2px solid black;
+        background-color: #eaeaea;
+        align-items: center;
+        margin: 10px auto 10px auto;
+        border-radius: 10px;
+        box-shadow: 10px 5px 5px rgb(182, 182, 182);
+    }
+
+    .top-section {
+        flex-direction: row;
+        justify-content: space-around;
+    }
+
+    .mid-section {
+        flex-direction: column;
     }
 
     .lower-section p {
@@ -99,6 +119,11 @@ footer {
 
     .mid-section {
         margin-top: 0;
+    }
+
+    footer {
+        margin-top: 5px;
+        color: white;
     }
 }
 
