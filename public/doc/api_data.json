@@ -1,0 +1,376 @@
+[
+  {
+    "type": "delete",
+    "url": "/api/contacts/:id",
+    "title": "Deletes a contact",
+    "name": "DeleteContact",
+    "group": "Contact",
+    "description": "<p>Deletes the contact if contact with given id is found. Responds with 400 otherwise.</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Integer",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Unique ID of the contact</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 204 No Content",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "ContactNotFound",
+            "description": "<p>Cannot find contact.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "HTTP/1.1 400 Bad Request",
+          "content": "HTTP/1.1 400 Bad Request",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "app/_apidoc.js",
+    "groupTitle": "Contact"
+  },
+  {
+    "type": "get",
+    "url": "/api/contacts/:id",
+    "title": "Retreive a single contact",
+    "group": "Contact",
+    "name": "GetContact",
+    "description": "<p>Responds with JSON representation of the contact with given id. Returns 400 error if the contact cannot be found.</p>",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Integer",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Unique indentifier of the contact.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "full_name",
+            "description": "<p>Full Name of the contact.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "email",
+            "description": "<p>Email of the contact.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "phone_number",
+            "description": "<p>Phone number of the contact.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "tags",
+            "description": "<p>Comma-separated list of tags associated with the contact.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n  \"id\": 1,\n  \"full_name\": \"Arthur Dent\",\n  \"email\": \"dent@example.com\",\n  \"phone_number\": \"12345678901\",\n  \"tags\": \"work,business\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "ContactNotFound",
+            "description": "<p>Cannot find contact.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "HTTP/1.1 400 Bad Request",
+          "content": "HTTP/1.1 400 Bad Request",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "app/_apidoc.js",
+    "groupTitle": "Contact"
+  },
+  {
+    "type": "get",
+    "url": "/api/contacts",
+    "title": "Get all contacts.",
+    "group": "Contact",
+    "name": "GetContacts",
+    "description": "<p>Responds with all contacts in the database in JSON format.</p>",
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n[\n  {\n    \"id\": 1,\n    \"full_name\": \"Arthur Dent\",\n    \"email\": \"dent@example.com\",\n    \"phone_number\": \"12345678901\",\n    \"tags\": \"work,business\"\n  },\n  {\n    \"id\": 2,\n    \"full_name\": \"George Smiley\",\n    \"email\": \"smiley@example.com\",\n    \"phone_number\": \"12345678901\",\n    \"tags\": null\n  }\n]",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "app/_apidoc.js",
+    "groupTitle": "Contact"
+  },
+  {
+    "type": "post",
+    "url": "/api/contacts/",
+    "title": "Save a contact.",
+    "group": "Contact",
+    "name": "PostContact",
+    "description": "<p>Accepts JSON or query string as request body. Responds with JSON representation of the contact with given id. Returns 400 error if the contact cannot be found.</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "full_name",
+            "description": "<p>Required: Full name of the contact</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "email",
+            "description": "<p>Email of the contact.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "phone_number",
+            "description": "<p>Phone number of the contact.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "tags",
+            "description": "<p>Comma-separated list of tags associated with the contact.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Integer",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Unique indentifier of the contact.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "full_name",
+            "description": "<p>Full Name of the contact.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "email",
+            "description": "<p>Email of the contact.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "phone_number",
+            "description": "<p>Phone number of the contact.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "tags",
+            "description": "<p>Comma-separated list of tags associated with the contact.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 201 OK\n{\n  \"id\": 1,\n  \"full_name\": \"Arthur Dent\",\n  \"email\": \"dent@example.com\",\n  \"phone_number\": \"12345678901\",\n  \"tags\": \"work,business\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "ContactNotFound",
+            "description": "<p>Cannot find contact.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "HTTP/1.1 400 Bad Request",
+          "content": "HTTP/1.1 400 Bad Request",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "app/_apidoc.js",
+    "groupTitle": "Contact"
+  },
+  {
+    "type": "put",
+    "url": "/api/contacts/",
+    "title": "Update a contact.",
+    "group": "Contact",
+    "name": "PutContact",
+    "description": "<p>Accepts JSON or query string as request body. Preserves previous values of attributes that aren't present.</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "full_name",
+            "description": "<p>Full name of the contact</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "email",
+            "description": "<p>Email of the contact.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "phone_number",
+            "description": "<p>Phone number of the contact.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "tags",
+            "description": "<p>Comma-separated list of tags associated with the contact.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Integer",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Unique indentifier of the contact.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "full_name",
+            "description": "<p>Full Name of the contact.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "email",
+            "description": "<p>Email of the contact.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "phone_number",
+            "description": "<p>Phone number of the contact.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "tags",
+            "description": "<p>Comma-separated list of tags associated with the contact.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 201 OK\n{\n  \"id\": 1,\n  \"full_name\": \"Arthur Dent\",\n  \"email\": \"dent@example.com\",\n  \"phone_number\": \"12345678901\",\n  \"tags\": \"work,business\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "ContactNotFound",
+            "description": "<p>Cannot find contact.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "HTTP/1.1 400 Bad Request",
+          "content": "HTTP/1.1 400 Bad Request",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "app/_apidoc.js",
+    "groupTitle": "Contact"
+  }
+]
