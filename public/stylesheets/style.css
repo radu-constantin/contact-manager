@@ -4,6 +4,8 @@
 }
 
 html {
+    height: 100vh;
+    width: 100vw;
     font-size: 16px;
     font-family: 'Koulen', cursive;
     box-sizing: border-box;
@@ -17,10 +19,18 @@ header {
 }
 
 body {
-    width: 100%;
+    height: 100vh;
+    width: 100vw;
     display: flex;
     flex-direction: column;
     background-color: #eaeaea;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 2;
+    justify-content: space-evenly;
 }
 
 header h3 {
@@ -32,25 +42,46 @@ input, button {
     border-radius: 10px;
 }
 
+button:hover, input[type='submit']:hover {
+    background-color: rgb(129, 52, 149);
+    color: white;
+}
+
 .container {
     width: 100%;
     margin: 0 auto;
     min-height: 150px;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
 }
 
-.top-section {
+#contact-form {
+    display: flex;
+    justify-content:space-around;
+}
+
+#contact-form input {
+    padding: 10px;
+}
+
+#contact-form input:last-child {
+    margin-left: 35px;
+    padding: 15px;
+    font-size: 1.4em;
+}
+
+#contact-form label {
+    font-size: 1.4em;
+    text-align: center;
+}
+
+#search {
     align-items: center;
     justify-content:space-around;
 }
 
-.mid-section {
-    width: 100%;
-    /* margin: 0; */
-}
-
-.top-section button, .top-section input {
+#search button, #search input {
     padding: 2%;
     border: 1px solid grey;
     font-size: 1.4em;
@@ -58,22 +89,37 @@ input, button {
     margin-top: 10px;
 }
 
-.top-section input {
+#search input {
     text-align: center;
     color: grey;
 }
 
-.mid-section {
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+#contact-list {
+    box-sizing: border-box;
+    width: 100%;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    padding: 10px;
 }
 
-.mid-section button {
-    padding: 15px;
+.button-container {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+#contact-list button {
+    padding: 10px;
     border: 1px solid grey;
-    font-size: 1.4em;
-    width: 40%;
+    font-size: 1.2em;
+    flex: 1 1 0;
+}
+
+.contact-box {
+    /* border: 2px solid black;
+    border-radius: 5px; */
+    box-sizing: border-box;
+    padding: 20px;
+    text-align: center;
 }
 
 .lower-section p {
@@ -84,9 +130,10 @@ input, button {
 footer {
     text-align: center;
     width: 100%;
-    margin-top: 15px;
+    /* margin-top: 15px; */
     background: rgb(43,35,170);
     background: linear-gradient(90deg, rgba(43,35,170,1) 0%, rgba(79,94,209,1) 14%, rgba(255,0,224,1) 86%);
+    flex-grow: 0;
 }
 
 @media screen and (min-width: 600px) {
@@ -99,26 +146,23 @@ footer {
         border: 2px solid black;
         background-color: #eaeaea;
         align-items: center;
-        margin: 10px auto 10px auto;
         border-radius: 10px;
         box-shadow: 10px 5px 5px rgb(182, 182, 182);
     }
 
-    .top-section {
+    #search {
         flex-direction: row;
         justify-content: space-around;
     }
 
-    .mid-section {
-        flex-direction: column;
+    #contact-list {
+        width: 80%;
+        margin-top: 0;
+        justify-content: flex-start;
     }
 
     .lower-section p {
         padding: 0 20px 0 20px;
-    }
-
-    .mid-section {
-        margin-top: 0;
     }
 
     footer {
