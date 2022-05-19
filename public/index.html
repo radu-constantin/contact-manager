@@ -19,19 +19,19 @@
         <h3>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Optio atque voluptatibus ipsa modi molestiae illum earum deserunt soluta corrupti iure.</h3>
     </header>
     <main>
-        <section class="container" id="search">
-            <button id="add_contact_btn">Add Contact</button>
-            <input type="text" placeholder="Search contacts">
-        </section>
-        <section class="container" id="contact-list">
-            <!-- <h2>There are no contacts.</h3>
-            <button>Add Contact</button> -->
-        </section>
+        
     </main>
     <footer>
         <p>Developed by Constantin Radu-Adrian</p>
         <p>2022</p>
     </footer>
+
+    <script id="search_template" type="text/x-handlebars">
+        <section class="container" id="search">
+            <button id="add_contact_btn">Add Contact</button>
+            <input type="text" placeholder="Search contacts">
+        </section>
+    </script>
 
     <script id="form_template" type="text/x-handlebars">
         <section class="container" id="contact-form">
@@ -39,28 +39,28 @@
                 <label for="name-input">Name:</label>
                 <input type="text" id="name-input" name="full_name" required>
 
-                <label for="phone-input">Phone:</label>
-                <input type="tel" id="phone-input" name="phone_number">
-
                 <label for="email-input">Email:</label>
                 <input type="email" id="email-input" name="email">
+
+                <label for="phone-input">Phone:</label>
+                <input type="tel" id="phone-input" name="phone_number">
 
                 <label for="tags-input">Tags:</label>
                 <input type="text" id="tags-input" name="tags">
 
-                <input type="submit">
+                <input type="submit" id="submit_form">
             </form>
         </section>
     </script>
 
     <script id="contact_template" type="text/x-handlebars">
-            <div class="contact-box" id="contact_{{{id}}}">
+            <div class="contact-box" id={{id}}>
                 <h3>{{full_name}}</h3>
                 <p>{{phone_number}}</p>
                 <p>{{email}}</p>
                 <div class="button_container">
-                    <button>Edit</button>
-                    <button>Delete</button>
+                    <button id="edit_{{{id}}}">Edit</button> <!--Is it wrong to expose id like this?-->
+                    <button id="delete_{{{id}}}">Delete</button>
                 </div>
             </div>
     </script>
