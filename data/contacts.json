@@ -19,5 +19,12 @@
     "email": "ph@example.com",
     "phone_number": "54321098761",
     "tags": null
+  },
+  {
+    "full_name": "Radu",
+    "phone_number": "0734342",
+    "email": "radu@gmail.com",
+    "tags": "",
+    "id": 4
   }
 ]

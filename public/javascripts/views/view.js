@@ -33,9 +33,9 @@ class View {
         this.main.insertAdjacentElement("beforeend", contactsContainer);
     }
 
-    renderForm() {
+    renderForm(contact) {
         this.resetView();
-        this.main.insertAdjacentHTML("beforeend", this.formTemplate());
+        this.main.insertAdjacentHTML("beforeend", this.formTemplate(contact));
     }
 
     getFormData() {
@@ -52,7 +52,10 @@ class View {
         this.body.addEventListener('click', callback);
     }
 
-
+    getFormID() {
+        let form = document.querySelector("form");
+        return form.id;
+    }
 }
 
 export default new View();

@@ -4,7 +4,7 @@ import view from "./views/view.js";
 class Controller {
     async displayPage() {
         let contacts = await model.getAllContacts();
-
+        
         view.renderSearch();
         view.renderContacts(contacts);
     }
@@ -17,12 +17,20 @@ class Controller {
         view.bindListener((event) => {
             if (event.target.id === "add_contact_btn") {
                 view.renderForm();
+            } else if (event.target.id.includes("edit")) {
+                let id = this.getIDfromButton(event.target.id);
+                model.getContact(id).then(contactObj => view.renderForm(contactObj));
             } else if (event.target.id === "submit_form") {
-                //check if 
-
-                model.addContact(view.getFormData());
-                this.displayPage();
+                let formID = Number(view.getFormID());
+                if (formID) {
+                    model.editContact(formID, view.getFormData());
+                    this.displayPage();
+                } else {
+                    model.addContact(view.getFormData());
+                    this.displayPage();
+                }
             } else if (event.target.id.includes("delete")) {
+                alert("Are you sure you want to delete this contact?")
                 model.deleteContact(this.getIDfromButton(event.target.id));
                 view.resetView();
                 this.displayPage();
