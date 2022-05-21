@@ -1,9 +1,7 @@
 class View {
     constructor() {
         this.body = document.querySelector("body");
-        this.search = document.querySelector("#search");
         this.addContactBtn = document.querySelector("#add_contact_btn");
-        this.contactList = document.querySelector("#contact-list");
         this.main = document.querySelector("main");
 
         this.contactTemplate = Handlebars.compile(document.querySelector("#contact_template").innerHTML);
@@ -33,6 +31,19 @@ class View {
         this.main.insertAdjacentElement("beforeend", contactsContainer);
     }
 
+    filterContacts(contacts) {
+        let contactList = document.querySelector("#contact-list");
+        contactList.innerHTML = "";
+        if (contacts.length > 0) {
+            contacts.forEach(contact => {
+                contactList.insertAdjacentHTML("beforeend", this.contactTemplate(contact));
+            })
+        } else {
+            
+        }
+       
+    }
+
     renderForm(contact) {
         this.resetView();
         this.main.insertAdjacentHTML("beforeend", this.formTemplate(contact));
@@ -48,13 +59,23 @@ class View {
         return JSON.stringify(json);
     }
 
-    bindListener(callback) {
+    bindBodyListener(callback) {
         this.body.addEventListener('click', callback);
+    }
+
+    bindSearchListener(callback) {
+        let inputBox = document.querySelector("#search input");
+        inputBox.addEventListener('keyup', callback);
     }
 
     getFormID() {
         let form = document.querySelector("form");
         return form.id;
+    }
+
+    getSearchInput() {
+        let inputBox = document.querySelector("#search input");
+        return inputBox.value;
     }
 }
 
