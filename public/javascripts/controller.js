@@ -2,11 +2,18 @@ import model from "./model.js";
 import view from "./views/view.js";
 
 class Controller {
+    constructor() {
+        this.contacts = null;
+    }
+
     async displayPage() {
-        let contacts = await model.getAllContacts();
-        
         view.renderSearch();
-        view.renderContacts(contacts);
+        await this.refreshContacts();
+        view.renderContacts(this.contacts);
+    }
+
+    async refreshContacts() {
+        this.contacts = await model.getAllContacts();
     }
 
     getIDfromButton(string) {
@@ -14,7 +21,7 @@ class Controller {
     }
 
     handleSubmit() {
-        view.bindListener((event) => {
+        view.bindBodyListener((event) => {
             if (event.target.id === "add_contact_btn") {
                 view.renderForm();
             } else if (event.target.id.includes("edit")) {
@@ -38,9 +45,24 @@ class Controller {
         })
     }
 
+    filterContacts(contacts, input) {
+        return contacts.filter(contact => {
+            return contact.full_name.toLowerCase().startsWith(input);
+        })
+    }
+
+    handleSearch() {
+        view.bindSearchListener(event => {
+            let input = view.getSearchInput();
+            let filteredContacts = this.filterContacts(this.contacts, input);
+            view.filterContacts(filteredContacts);
+        })
+    }
+
     init() {
         this.displayPage();
         this.handleSubmit();
+        this.handleSearch();
     }
 }
 
