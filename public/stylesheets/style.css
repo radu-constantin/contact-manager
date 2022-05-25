@@ -49,11 +49,26 @@ button:hover, input[type='submit']:hover {
 
 .container {
     width: 100%;
+    box-sizing: border-box;
     margin: 0 auto;
     min-height: 150px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+}
+
+#tag-list {
+    padding: 25px;
+}
+
+.tag-selector {
+    padding: 10px 15px 10px 15px;
+    margin: 5px;
+}
+
+.selected {
+    background-color: rgb(129, 52, 149);
+    color: white;
 }
 
 #contact-form {

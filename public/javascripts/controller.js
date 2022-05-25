@@ -4,16 +4,31 @@ import view from "./views/view.js";
 class Controller {
     constructor() {
         this.contacts = null;
+        this.tags = [];
+        this.selectedTags = [];
     }
 
     async displayPage() {
         view.renderSearch();
-        await this.refreshContacts();
-        view.renderContacts(this.contacts);
+        this.refreshContacts().then(() => {
+            view.renderTagList(this.tags);
+            view.renderContacts(this.contacts);
+        })
+
     }
 
     async refreshContacts() {
         this.contacts = await model.getAllContacts();
+        this.contacts.forEach(contact => {
+            if (contact.tags) {
+                contact.tags.split(",").forEach(tag => this.tags.push(tag));
+            }
+        })
+        this.tags = Array.from(new Set(this.tags));
+        this.tags = this.tags.map(element => {
+            let obj = {'tag': element};
+            return obj;
+        });
     }
 
     getIDfromButton(string) {
@@ -41,20 +56,44 @@ class Controller {
                 model.deleteContact(this.getIDfromButton(event.target.id));
                 view.resetView();
                 this.displayPage();
+            } else if (event.target.className === "tag-selector") {
+                this.handleTagFilter(event.target);
             }
         })
     }
 
-    filterContacts(contacts, input) {
+    handleTagFilter(target) {
+        let tag = target.textContent;
+        if (target.classList.contains("selected")) {
+            target.classList.remove("selected");
+            this.displayPage();
+        } else {
+            target.classList.add("selected");
+            let filteredContacts = this.filterContactsByTag(this.contacts, tag);
+            view.filterContacts(filteredContacts);
+        }
+        
+    }
+
+    filterContactsByName(contacts, input) {
         return contacts.filter(contact => {
             return contact.full_name.toLowerCase().startsWith(input);
         })
     }
 
+    filterContactsByTag(contacts, tag) {
+        return contacts.filter(contact => {
+            if (contact.tags) {
+                console.log(tag);
+                return contact.tags.includes(tag);
+            }
+        })
+    }
+
     handleSearch() {
-        view.bindSearchListener(event => {
+        view.bindSearchListener(() => {
             let input = view.getSearchInput();
-            let filteredContacts = this.filterContacts(this.contacts, input);
+            let filteredContacts = this.filterContactsByName(this.contacts, input);
             view.filterContacts(filteredContacts);
         })
     }

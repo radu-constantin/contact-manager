@@ -7,6 +7,7 @@ class View {
         this.contactTemplate = Handlebars.compile(document.querySelector("#contact_template").innerHTML);
         this.formTemplate = Handlebars.compile(document.querySelector("#form_template").innerHTML);
         this.searchTemplate = Handlebars.compile(document.querySelector("#search_template").innerHTML);
+        this.tagsTemplate = Handlebars.compile(document.querySelector("#tags_template").innerHTML);
     }
 
     resetView() {
@@ -31,6 +32,10 @@ class View {
         this.main.insertAdjacentElement("beforeend", contactsContainer);
     }
 
+    renderTagList(tags) {
+        this.main.insertAdjacentHTML("beforeend", this.tagsTemplate(tags));
+    }
+
     filterContacts(contacts) {
         let contactList = document.querySelector("#contact-list");
         contactList.innerHTML = "";
@@ -41,7 +46,6 @@ class View {
         } else {
             
         }
-       
     }
 
     renderForm(contact) {

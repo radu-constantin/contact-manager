@@ -19,19 +19,5 @@
     "email": "ph@example.com",
     "phone_number": "54321098761",
     "tags": null
-  },
-  {
-    "full_name": "Radu Constantin",
-    "phone_number": "078660807",
-    "email": "radu@gmail.com",
-    "tags": "",
-    "id": 4
-  },
-  {
-    "full_name": "Parke",
-    "phone_number": "0823823",
-    "email": "parker@gmail.com",
-    "tags": "",
-    "id": 5
   }
 ]
