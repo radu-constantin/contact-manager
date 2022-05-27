@@ -1,6 +1,7 @@
 class Model {
     constructor() {
-        // this.contacts = this.getAllContacts();
+        this.contacts = null;
+        this.tags = null;
     }
     
     getAllContacts() {
@@ -82,16 +83,18 @@ class Model {
     }
 
     deleteContact(id) {
-        let request = new XMLHttpRequest();
-        request.open("DELETE", `/api/contacts/${id}`)
+        return new Promise((resolve, reject) => {
+            let request = new XMLHttpRequest();
+            request.open("DELETE", `/api/contacts/${id}`)
 
-        request.addEventListener("load", () => {
-            if (request.status !== 204) {
-                alert("The contact could not be deleted!");
-            }
-        })
+            request.addEventListener("load", () => {
+                if (request.status === 204) {
+                    resolve(request.response);
+                }
+            })
 
-        request.send();
+            request.send();
+        });
     }
 }
 

@@ -1,61 +1,102 @@
 class View {
     constructor() {
-        this.body = document.querySelector("body");
-        this.addContactBtn = document.querySelector("#add_contact_btn");
+        this.templates = {
+            contactTemplate: Handlebars.compile(document.querySelector("#contact_template").innerHTML),
+            formTemplate: Handlebars.compile(document.querySelector("#form_template").innerHTML),
+            searchTemplate: Handlebars.compile(document.querySelector("#search_template").innerHTML),
+            tagsTemplate: Handlebars.compile(document.querySelector("#tags_template").innerHTML),
+        }
+
         this.main = document.querySelector("main");
+        this.searchBar = this.initializeElement("section", "container", "search");
+        this.contactList = this.initializeElement("section", "container", "contact_list");
+        this.tagList = this.initializeElement("section", "container", "tag_list");
+        this.form = this.initializeElement("section", "container", "contact_form");
 
-        this.contactTemplate = Handlebars.compile(document.querySelector("#contact_template").innerHTML);
-        this.formTemplate = Handlebars.compile(document.querySelector("#form_template").innerHTML);
-        this.searchTemplate = Handlebars.compile(document.querySelector("#search_template").innerHTML);
-        this.tagsTemplate = Handlebars.compile(document.querySelector("#tags_template").innerHTML);
+        this.main.appendChild(this.searchBar);
+        this.searchBar.innerHTML = this.templates.searchTemplate();
+        this.main.appendChild(this.tagList);
+        this.main.appendChild(this.contactList);
+        this.main.appendChild(this.form);
+        this.form.style.display = "none";
     }
 
-    resetView() {
-        while (this.main.lastChild) {
-            this.main.removeChild(this.main.lastChild);
-        }
+    resetSearchInput() {
+        this.searchBar.querySelector("input").value = "";
     }
 
-    renderSearch() {
-        this.main.insertAdjacentHTML("beforeend", this.searchTemplate());
+    resetUI() {
+        this.searchBar.style.display = "flex";
+        this.contactList.style.display = "flex";
+        this.tagList.style.display = "flex";      
+
+        this.form.style.display = "none";
     }
 
-    renderContacts(contacts) {
-        let contactsContainer = document.createElement('section');
-        contactsContainer.classList.add('container');
-        contactsContainer.id = "contact-list";
+    displayForm(contact) {
+        this.hideUI();
+        this.form.style.display = "flex";
+    
+        this.form.innerHTML = this.templates.formTemplate(contact);
+ 
+    }
 
+    hideUI() {
+        this.form.style.display = "none";
+        this.searchBar.style.display = "none";
+        this.contactList.style.display = "none";
+        this.tagList.style.display = "none";
+    }
+
+    displayContacts(contacts) {
+        this.resetContacts();
         contacts.forEach(contact => {
-            contactsContainer.insertAdjacentHTML("beforeend", this.contactTemplate(contact));
+            this.contactList.insertAdjacentHTML("beforeend", this.templates.contactTemplate(contact));
         })
-
-        this.main.insertAdjacentElement("beforeend", contactsContainer);
     }
 
-    renderTagList(tags) {
-        this.main.insertAdjacentHTML("beforeend", this.tagsTemplate(tags));
-    }
-
-    filterContacts(contacts) {
-        let contactList = document.querySelector("#contact-list");
-        contactList.innerHTML = "";
-        if (contacts.length > 0) {
-            contacts.forEach(contact => {
-                contactList.insertAdjacentHTML("beforeend", this.contactTemplate(contact));
-            })
-        } else {
-            
+    resetContacts() {
+        while (this.contactList.lastChild) {
+            this.contactList.removeChild(this.contactList.lastChild);
         }
     }
 
-    renderForm(contact) {
-        this.resetView();
-        this.main.insertAdjacentHTML("beforeend", this.formTemplate(contact));
+    displayTags(tags) {
+        this.tagList.innerHTML = this.templates.tagsTemplate(tags);
+    }
+
+    bindAddContact(handler) {
+        let button = this.searchBar.querySelector("button");
+        button.addEventListener("click", handler);
+    }
+
+    bindSubmitNewContact(handler) {
+        this.form.addEventListener("click", handler)
+    }
+
+    bindContactActions(handler) {
+        this.contactList.addEventListener("click", handler);
+    }
+
+    bindTagFilter(handler) {
+        this.tagList.addEventListener("click", handler);
+    }
+
+    bindSearchFilter(handler) {
+        let inputBox = this.searchBar.querySelector("input");
+        inputBox.addEventListener("keyup", handler);
+    }
+
+    initializeElement(tag, className, id) {
+        let element = document.createElement(tag);
+        if (className) element.classList.add(className);
+        if (id) element.id = id;
+        return element;
     }
 
     getFormData() {
-        let data = new FormData(document.querySelector('form'));
-        let json = {}
+        let data = new FormData(this.form.querySelector("form"));
+        let json = {};
         for (let pair of data.entries()) {
             json[pair[0]] = pair[1]; 
         }
@@ -63,23 +104,9 @@ class View {
         return JSON.stringify(json);
     }
 
-    bindBodyListener(callback) {
-        this.body.addEventListener('click', callback);
-    }
-
-    bindSearchListener(callback) {
-        let inputBox = document.querySelector("#search input");
-        inputBox.addEventListener('keyup', callback);
-    }
-
     getFormID() {
         let form = document.querySelector("form");
         return form.id;
-    }
-
-    getSearchInput() {
-        let inputBox = document.querySelector("#search input");
-        return inputBox.value;
     }
 }
 

@@ -27,43 +27,38 @@
     </footer>
 
     <script id="search_template" type="text/x-handlebars">
-        <section class="container" id="search">
-            <button id="add_contact_btn">Add Contact</button>
-            <input type="text" placeholder="Search contacts">
-        </section>
+        <button id="add_contact_btn">Add Contact</button>
+        <input type="text" placeholder="Search contacts">
     </script>
 
     <script id="tags_template" type="text/x-handlebars">
-        <section class="container" id="tag-list">
             <h2>Tags:</h2>
             {{#each .}}
             <button class="tag-selector">{{tag}}</button>
             {{/each}}
-        </section>
     </script>
 
     <script id="form_template" type="text/x-handlebars">
-        <section class="container" id="contact-form">
-            <form id={{id}}>
-                <label for="name-input">Name:</label>
-                <input type="text" id="name-input" name="full_name" value="{{full_name}}" required>
+        <form id={{id}}>
+            <label for="name-input">Name:</label>
+            <input type="text" id="name-input" name="full_name" value="{{full_name}}" required>
 
-                <label for="email-input">Email:</label>
-                <input type="email" id="email-input" name="email" value={{email}} required>
+            <label for="email-input">Email:</label>
+            <input type="email" id="email-input" name="email" value="{{email}}" required>
 
-                <label for="phone-input">Phone:</label>
-                <input type="tel" id="phone-input" name="phone_number" value={{phone_number}} required>
+            <label for="phone-input">Phone:</label>
+            <input type="tel" id="phone-input" name="phone_number" value="{{phone_number}}" required>
 
-                <label for="tags-input">Tags:</label>
-                <input type="text" id="tags-input" name="tags" value={{tags}}>
+            <label for="tags-input">Tags:</label>
+            <input type="text" id="tags-input" name="tags" value={{tags}}>
 
-                <input type="submit" id="submit_form">
-            </form>
-        </section>
+            <input type="submit" id="submit_form">
+            <button id="cancel_btn">Cancel</button>
+        </form>
     </script>
 
     <script id="contact_template" type="text/x-handlebars">
-            <div class="contact-box" id={{id}}>
+            <div class="contact_box" id={{id}}>
                 <h3>{{full_name}}</h3>
                 <p>{{phone_number}}</p>
                 <p>{{email}}</p>

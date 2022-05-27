@@ -50,11 +50,16 @@ button:hover, input[type='submit']:hover {
 .container {
     width: 100%;
     box-sizing: border-box;
+    padding: 25px;
     margin: 0 auto;
     min-height: 150px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+}
+
+#cancel_btn {
+    padding: 10px;
 }
 
 #tag-list {
@@ -71,22 +76,22 @@ button:hover, input[type='submit']:hover {
     color: white;
 }
 
-#contact-form {
+#contact_form {
     display: flex;
     justify-content:space-around;
 }
 
-#contact-form input {
+#contact_form input {
     padding: 10px;
 }
 
-#contact-form input:last-child {
+#contact_form input:last-child {
     margin-left: 35px;
     padding: 15px;
     font-size: 1.4em;
 }
 
-#contact-form label {
+#contact_form label {
     font-size: 1.4em;
     text-align: center;
 }
@@ -109,7 +114,7 @@ button:hover, input[type='submit']:hover {
     color: grey;
 }
 
-#contact-list {
+#contact_list {
     box-sizing: border-box;
     width: 100%;
     justify-content: space-evenly;
@@ -117,19 +122,19 @@ button:hover, input[type='submit']:hover {
     padding: 10px;
 }
 
-.button-container {
+.button_container {
     display: flex;
     justify-content: space-evenly;
 }
 
-#contact-list button {
+#contact_list button {
     padding: 10px;
     border: 1px solid grey;
     font-size: 1.2em;
     flex: 1 1 0;
 }
 
-.contact-box {
+.contact_box {
     /* border: 2px solid black;
     border-radius: 5px; */
     box-sizing: border-box;
@@ -170,14 +175,10 @@ footer {
         justify-content: space-around;
     }
 
-    #contact-list {
+    #contact_list {
         width: 80%;
         margin-top: 0;
         justify-content: flex-start;
-    }
-
-    .lower-section p {
-        padding: 0 20px 0 20px;
     }
 
     footer {
