@@ -135,8 +135,9 @@ class Controller {
     };
 
     filterContactsByName(contacts, input) {
+        input = input.toLowerCase();
         return contacts.filter(contact => {
-            return contact.full_name.toLowerCase().startsWith(input);
+            return contact.full_name.toLowerCase().includes(input);
         })
     };
 }
