@@ -8,6 +8,11 @@ class View {
         }
 
         this.main = document.querySelector("main");
+
+        this.displayUI();
+    }
+
+    displayUI() {
         this.searchBar = this.initializeElement("section", "container", "search");
         this.contactList = this.initializeElement("section", "container", "contact_list");
         this.tagList = this.initializeElement("section", "container", "tag_list");
@@ -15,6 +20,7 @@ class View {
 
         this.main.appendChild(this.searchBar);
         this.searchBar.innerHTML = this.templates.searchTemplate();
+
         this.main.appendChild(this.tagList);
         this.main.appendChild(this.contactList);
         this.main.appendChild(this.form);
@@ -50,9 +56,13 @@ class View {
 
     displayContacts(contacts) {
         this.resetContacts();
-        contacts.forEach(contact => {
-            this.contactList.insertAdjacentHTML("beforeend", this.templates.contactTemplate(contact));
-        })
+        if (contacts.length === 0) {
+            this.contactList.insertAdjacentHTML("beforeend", "<h2>There are no contacts with the selected criteria</h2>")
+        } else {
+            contacts.forEach(contact => {
+                this.contactList.insertAdjacentHTML("beforeend", this.templates.contactTemplate(contact));
+            })
+        }
     }
 
     resetContacts() {

@@ -6,14 +6,14 @@ class Controller {
         this.activeFilters = [];
         this.filteredContacts = null;
 
-        this.refreshContacts();
         this.self = this;
 
+        this.refreshContacts();
         this.bindListeners();      
     }
 
     bindListeners() {
-        view.bindSubmitNewContact(this.handleSubmitNewContact.bind(this.self));
+        view.bindSubmitNewContact(this.handleSubmit.bind(this.self));
         view.bindAddContact(this.handleAddButton);
         view.bindContactActions(this.handleContactActions.bind(this.self));
         view.bindTagFilter(this.handleTagFilter.bind(this.self));
@@ -34,6 +34,7 @@ class Controller {
         model.contacts.forEach(contact => {
             if (contact.tags) {
                 contact.tags.split(",").forEach(tag => {
+                    tag = tag.trim();
                     if (!tags.includes(tag)) {
                         tags.push(tag);
                     }
@@ -45,11 +46,11 @@ class Controller {
         })
     }
 
-    handleAddButton() {
+    handleAddButton() { //Feels a bit unnecesarry to wrap this within a function, but I think it aids code readability? 
         view.displayForm();
     }
 
-    handleSubmitNewContact(event) {
+    handleSubmit(event) {
         if (event.target.id === "submit_form") {
             event.preventDefault();
             let id = view.getFormID();
@@ -74,6 +75,7 @@ class Controller {
     handleTagFilter(event) {
         let target = event.target;
         if (target.tagName === "BUTTON") {
+            view.resetSearchInput();
             let tag = target.textContent;
             if (target.classList.contains("selected")) {
                 target.classList.remove("selected");
@@ -109,7 +111,8 @@ class Controller {
 
     async handleContactActions(event) { //Handles the option to delete or edit a contact.
         if  (event.target.id.includes("delete")) {
-            this.deleteContact(event);
+            let answer = confirm("Are you sure you want to delete this contact?");
+            if (answer) this.deleteContact(event);
         } else if (event.target.id.includes("edit")) {
             let id = this.getIDfromButton(event.target.id);
             event.preventDefault();
