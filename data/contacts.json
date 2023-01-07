@@ -1,30 +1,16 @@
 [
   {
     "id": 1,
-    "full_name": "Naveed Fida",
-    "email": "nf@example.com",
+    "full_name": "Radu Constantin",
+    "email": "radu@example.com",
     "phone_number": "12345678901",
     "tags": "work,friend"
   },
   {
     "id": 2,
-    "full_name": "Victor Reyes",
-    "email": "vpr@example.com",
+    "full_name": "Mike",
+    "email": "mike@example.com",
     "phone_number": "09876543210",
     "tags": "work,friend"
-  },
-  {
-    "id": 3,
-    "full_name": "Pete Hanson",
-    "email": "ph@example.com",
-    "phone_number": "54321098761",
-    "tags": null
-  },
-  {
-    "full_name": "jadwawd",
-    "phone_number": "12345",
-    "email": "ra@gmail.com",
-    "tags": "co-worker",
-    "id": 5
   }
 ]
